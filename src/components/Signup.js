@@ -5,19 +5,17 @@ export default class Signup extends Component {
   state = {
     email: "",
     password: "",
-    username: "",
-    image: ""
+    username: ""
   };
   onSubmit = e => {
     e.preventDefault();
-    // axios
-    //   .post("http://localhost:5000/signup", this.state)
-    //   .then(res => console.log(res))
-    //   .catch(err => console.log(err));
-    console.log(this.state);
+    axios
+      .post("http://localhost:5000/signup", this.state)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   };
 
-  onChange = e => {
+  onChangeHandler = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -38,6 +36,7 @@ export default class Signup extends Component {
                 required={true}
                 autoFocus=""
                 name="email"
+                onChange={this.onChangeHandler}
               />
             </div>
             <div className="form-label-group mt-3">
@@ -49,9 +48,10 @@ export default class Signup extends Component {
                 required={true}
                 autoFocus=""
                 name="username"
+                onChange={this.onChangeHandler}
               />
             </div>
-            <div className="form-label-group mt-3">
+            {/* <div className="form-label-group mt-3">
               <input
                 type="text"
                 className="form-control"
@@ -59,7 +59,7 @@ export default class Signup extends Component {
                 required={true}
                 name="image"
               />
-            </div>
+            </div> */}
             <div className="form-label-group mt-3">
               <input
                 type="password"
@@ -68,6 +68,7 @@ export default class Signup extends Component {
                 placeholder="Password"
                 required={true}
                 name="password"
+                onChange={this.onChangeHandler}
               />
             </div>
 
