@@ -44,8 +44,38 @@ class App extends Component {
           "https://images.pexels.com/photos/999250/pexels-photo-999250.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         created: "12 jan 2018"
       }
-    ]
+    ],
+    isAuthenticated: false
   };
+
+  componentDidMount() {
+    // this.getUser();
+  }
+
+  getUser() {
+    axios
+      .get("http://localhost:5000/", { withCredentials: true })
+      .then(response => {
+        console.log(response.data);
+        if (response.data) {
+          console.log(
+            "Get User: There is a user saved in the server session: "
+          );
+        } else {
+          console.log("Get user: no user");
+        }
+      });
+  }
+
+  toogleAuthentication = data => {
+    this.setState({
+      ...this.state,
+      isAuthenticated: true
+    });
+    console.log(this.state);
+    console.log(data);
+  };
+
   render() {
     return (
       <BrowserRouter>
@@ -53,7 +83,13 @@ class App extends Component {
           <Nav />
           <Switch>
             <Route exact path="/" component={Header} />
-            <Route path="/login" component={Login} />
+            <Route
+              exact
+              path="/login"
+              render={props => (
+                <Login toogleAuthentication={this.toogleAuthentication} />
+              )}
+            />
             <Route path="/signup" component={Signup} />
             <Route exact path="/devs" component={DevFeed} />
             <Route

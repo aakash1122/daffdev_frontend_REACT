@@ -10,8 +10,14 @@ export default class Signup extends Component {
   onSubmit = e => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/signup", this.state)
-      .then(res => console.log(res))
+      .post("http://localhost:5000/signup", this.state, {
+        withCredentials: true
+      })
+      .then(res => {
+        if (res.status === 200) {
+          this.props.history.push("/login");
+        }
+      })
       .catch(err => console.log(err));
   };
 
