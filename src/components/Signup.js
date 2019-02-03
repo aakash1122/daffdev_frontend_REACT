@@ -16,11 +16,6 @@ export default class Signup extends Component {
     formData.append("email", this.state.email);
     formData.append("username", this.state.username);
     formData.append("password", this.state.password);
-    // const user = {
-    //   email: this.state.email,
-    //   password: this.state.password,
-    //   username: this.state.username,
-    // };
 
     axios
       .post("http://localhost:5000/signup", formData, {

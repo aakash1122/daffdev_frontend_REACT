@@ -9,6 +9,7 @@ import PostFeed from "./components/post/PostFeed";
 import PostDetail from "./components/post/PostDetail";
 import Profile from "./components/dev/Profile";
 import Signup from "./components/Signup";
+import DevDetail from "./components/dev/DevDetail";
 
 class App extends Component {
   state = {
@@ -18,10 +19,35 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // this.getUser();
+    this.getAllPosts();
+    this.getAllUser();
   }
 
-  getUser() {
+  getAllUser = () => {
+    axios
+      .get("http://localhost:5000/users", { withCredentials: true })
+      .then(users => {
+        this.setState({
+          users: users
+        });
+        console.log("users fetched ", this.state.users);
+      })
+      .catch(err => console.log(err));
+  };
+
+  getAllPosts = () => {
+    axios
+      .get("http://localhost:5000/posts", { withCredentials: true })
+      .then(posts => {
+        this.setState({
+          posts: posts
+        });
+        console.log("Posts fetched ", this.state.posts);
+      })
+      .catch(err => console.log(err));
+  };
+
+  getUser = () => {
     axios
       .get("http://localhost:5000/", { withCredentials: true })
       .then(response => {
@@ -34,7 +60,7 @@ class App extends Component {
           console.log("Get user: no user");
         }
       });
-  }
+  };
 
   toogleAuthentication = data => {
     this.setState({
@@ -60,7 +86,8 @@ class App extends Component {
               )}
             />
             <Route path="/signup" component={Signup} />
-            <Route exact path="/devs" component={DevFeed} />
+            <Route exact path="/dev/:id" component={DevDetail} />
+            <Route path="/devs" component={DevFeed} />
             <Route
               exact
               path="/posts"
@@ -73,7 +100,7 @@ class App extends Component {
               )}
             />
             <Route
-              path="/devs/:id"
+              path="/profile"
               render={match => (
                 <Profile posts={this.state.users} match={match} />
               )}
