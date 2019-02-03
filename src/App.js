@@ -10,6 +10,7 @@ import PostDetail from "./components/post/PostDetail";
 import Profile from "./components/dev/Profile";
 import Signup from "./components/Signup";
 import DevDetail from "./components/dev/DevDetail";
+import AddPost from "./components/post/AddPost";
 
 class App extends Component {
   state = {
@@ -93,6 +94,7 @@ class App extends Component {
               path="/posts"
               render={() => <PostFeed posts={this.state.posts} />}
             />
+            <Route path="/addPost" component={AddPost} />
             <Route
               path="/posts/:id"
               render={match => (

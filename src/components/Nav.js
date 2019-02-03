@@ -30,6 +30,9 @@ export default function Nav() {
                   <Link to="/posts">Posts</Link>
                 </li>
                 <li className="nav-item">
+                  <Link to="/addPost">Add Post</Link>
+                </li>
+                <li className="nav-item">
                   <Link to="/profile">Profile</Link>
                 </li>
                 <form className="form-inline my-2 my-lg-0">

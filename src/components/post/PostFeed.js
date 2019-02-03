@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function PostFeed({ posts }) {
-  const postList = posts.map(post => {
+  const postList = posts.data.map(post => {
     return (
-      <div className="post-card shadow d-flex w-75 mx-auto mb-4" key={post.id}>
+      <div className="post-card shadow d-flex w-75 mx-auto mb-4" key={post._id}>
         <div className="post-image">
           <img src={post.image} alt="" className="w-100 h-100 " />
         </div>
